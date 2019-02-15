@@ -1,4 +1,5 @@
-var db = require("../models");
+// var db = require("../models");
+const mockData = [{id:"", text:"", discription: ""}]
 
 module.exports = function(app) {
   // Load index page
@@ -9,6 +10,11 @@ module.exports = function(app) {
         examples: dbExamples
       });
     });
+    res.render("index", {
+      msg: "Welcome!",
+      examples: dbExamples
+    });
+    
   });
 
   // Load example page and pass in an example by id
