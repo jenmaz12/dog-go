@@ -1,99 +1,102 @@
-// Get references to page elements
-const $exampleText = $('#example-text');
-const $exampleDescription = $('#example-description');
-const $submitBtn = $('#submit');
-const $exampleList = $('#example-list');
+$(document).ready(() => {
+  // Get references to page elements
+  const appointmentDate = $('#appointment-date');
+  const appointmentTime = $('#appointment-time');
+  const $submitBtn = $('#submit');
+  const appointmentList = $('#appointment-list');
 
-// The API object contains methods for each kind of request we'll make
-const API = {
-  saveExample(example) {
-    return $.ajax({
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      type: 'POST',
-      url: 'api/examples',
-      data: JSON.stringify(example),
-    });
-  },
-  getExamples() {
-    return $.ajax({
-      url: 'api/examples',
-      type: 'GET',
-    });
-  },
-  deleteExample(id) {
-    return $.ajax({
-      url: `api/examples/${id}`,
-      type: 'DELETE',
-    });
-  },
-};
-
-// refreshExamples gets new examples from the db and repopulates the list
-const refreshExamples = function () {
-  API.getExamples().then((data) => {
-    const $examples = data.map((example) => {
-      const $a = $('<a>')
-        .text(example.text)
-        .attr('href', `/example/${example.id}`);
-
-      const $li = $('<li>')
-        .attr({
-          class: 'list-group-item',
-          'data-id': example.id,
-        })
-        .append($a);
-
-      const $button = $('<button>')
-        .addClass('btn btn-danger float-right delete')
-        .text('ｘ');
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-const handleFormSubmit = function (event) {
-  event.preventDefault();
-
-  const example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim(),
+  // The API object contains methods for each kind of request we'll make
+  const API = {
+    saveAppointment(appointment) {
+      return $.ajax({
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        type: 'POST',
+        url: 'api/appointments',
+        data: JSON.stringify(appointment),
+      });
+    },
+    getAppointments() {
+      return $.ajax({
+        url: 'api/appointments',
+        type: 'GET',
+      });
+    },
+    deleteExample(id) {
+      return $.ajax({
+        url: `api/appointments/${id}`,
+        type: 'DELETE',
+      });
+    },
   };
 
-  if (!(example.text && example.description)) {
-    alert('You must enter an example text and description!');
-    return;
-  }
+  // refreshExamples gets new appointments from the db and repopulates the list
+  const refreshAppointments = function () {
+    API.getAppointments().then((data) => {
+      const appointments = data.map((appointment) => {
+        const $a = $('<a>')
+          .text(appointment.time)
+          .attr('href', `/appointment/${appointment.id}`);
 
-  API.saveExample(example).then(() => {
-    refreshExamples();
-  });
+        const $li = $('<li>')
+          .attr({
+            class: 'list-group-item',
+            'data-id': appointment.id,
+          })
+          .append($a);
 
-  $exampleText.val('');
-  $exampleDescription.val('');
-};
+        const $button = $('<button>')
+          .addClass('btn btn-danger float-right delete')
+          .text('ｘ');
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-const handleDeleteBtnClick = function () {
-  const idToDelete = $(this)
-    .parent()
-    .attr('data-id');
+        $li.append($button);
 
-  API.deleteExample(idToDelete).then(() => {
-    refreshExamples();
-  });
-};
+        return $li;
+      });
 
-// Add event listeners to the submit and delete buttons
-$submitBtn.on('click', handleFormSubmit);
-$exampleList.on('click', '.delete', handleDeleteBtnClick);
+      appointmentList.empty();
+      appointmentList.append(appointments);
+    });
+  };
+
+  // handleFormSubmit is called whenever we submit a new example
+  // Save the new example to the db and refresh the list
+  const handleFormSubmit = function (event) {
+    event.preventDefault();
+
+    const appointment = {
+      text: $exampleText.val().trim(),
+      description: $exampleDescription.val().trim(),
+    };
+
+    if (!(example.text && example.description)) {
+      alert('You must enter an example text and description!');
+      return;
+    }
+
+    API.saveExample(example).then(() => {
+      refreshExamples();
+    });
+
+    $exampleText.val('');
+    $exampleDescription.val('');
+  };
+
+  // handleDeleteBtnClick is called when an example's delete button is clicked
+  // Remove the example from the db and refresh the list
+  const handleDeleteBtnClick = function () {
+    const idToDelete = $(this)
+      .parent()
+      .attr('data-id');
+
+    API.deleteExample(idToDelete).then(() => {
+      refreshExamples();
+    });
+  };
+
+  // Add event listeners to the submit and delete buttons
+  $submitBtn.on('click', handleFormSubmit);
+  $exampleList.on('click', '.delete', handleDeleteBtnClick);
+
+});
