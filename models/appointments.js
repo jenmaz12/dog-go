@@ -8,18 +8,24 @@ module.exports = function (sequelize, DataTypes) {
       },
     },
     startTime: {
-      type: DataTypes.STRING,
+      type: DataTypes.TIME,
       allowNull: false,
-      validate: {
-        len: [1, 50],
-      },
     },
     walkerChosen: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        len: [1, 50],
-      },
+    },
+    customerID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    overnightChosen: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    available: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
 
   });
