@@ -18,27 +18,58 @@ module.exports = function (app) {
     db.Appointment.create({
       date: req.body.date,
       startTime: req.body.startTime,
+      walkerChosen: req.body.walkerChosen,
     }).then((dbAppointment) => {
       res.json(dbAppointment);
     });
   });
 
+  // Create a new walker when a walker signs up
+  app.post('/api/walkers', (req, res) => {
+    db.Walker.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+    }).then((dbWalker) => {
+      res.json(dbWalker);
+    });
+  });
+
+  // Create a new customer when a customer signs up
+  app.post('/api/customers', (req, res) => {
+    db.Customer.create({
+      name: req.body.name,
+      petName: req.body.petName,
+      email: req.body.email,
+      phone: req.body.phone,
+    }).then((dbCustomer) => {
+      res.json(dbCustomer);
+    });
+  });
+
+  // update appointment when customer books it (available now false,
+  // attach customerID to appointment, input overnight option if applicable)
   app.put('/api/appointments/:id', (req, res) => {
-    db.Appointment.update({ available: false },
-      {
-        where: {
-          id: req.params.id,
-        },
-      })
+    db.Appointment.update({
+      available: false,
+      customerID: req.body.customerID,
+      overnightChosen: req.body.overnightChosen,
+    }, {
+      where: {
+        id: req.params.id,
+      },
+    })
       .then((dbPost) => {
         res.json(dbPost);
       });
   });
 
-  // Delete an example by id
+  // Delete an appointment by id (when the walker is no longer available at that time)
+  // For a customer to cancel an appointment, do an update
+  // so timeslot is available to other customers
   app.delete('/api/appointments/:id', (req, res) => {
-    db.Example.destroy({ where: { id: req.params.id } }).then((dbExample) => {
-      res.json(dbExample);
+    db.Appointment.destroy({ where: { id: req.params.id } }).then((dbAppointment) => {
+      res.json(dbAppointment);
     });
   });
 };
