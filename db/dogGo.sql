@@ -6,7 +6,7 @@ CREATE TABLE walkers (
 ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 first_name VARCHAR (50) NOT NULL,
 last_name VARCHAR (50) NOT NULL,
-rating DECIMAL (2,1)
+email VARCHAR (50) NOT NULL
 );
 
 CREATE TABLE customers (
@@ -17,27 +17,14 @@ email VARCHAR (128) NOT NULL UNIQUE,
 phone VARCHAR (10) NOT NULL UNIQUE
 );
 
-CREATE TABLE service (
-ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-serviceName VARCHAR (50),
-duration INT,
-price DEC (10,2)
-);
-
-CREATE TABLE schedule (
-ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-walkersID INT REFERENCES walkers(ID),
-timeslot INT,
-overnight BOOL DEFAULT false
-);
-
 CREATE TABLE appointments (
 ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-dateCreated TIMESTAMP,
-walkerChosen INT,
-customerID INT,
-timeslotChosen INT,
-overnightChosen BOOL
+date DATE NOT NULL,
+startTime TIME NOT NULL,
+walkerChosen INT REFERENCES walkers(ID),
+customerID INT REFERENCES customers(ID),
+overnightChosen BOOL DEFAULT false,
+available BOOL DEFAULT true
 
 );
 
