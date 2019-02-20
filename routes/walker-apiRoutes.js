@@ -17,7 +17,6 @@ module.exports = function (app) {
     // We set the value to an array of the models we want to include in a left outer join
     // In this case, just db.Post
     db.Walker.findAll({
-      include: [db.Appointment],
     }).then((dbWalker) => {
       res.json(dbWalker);
     });
