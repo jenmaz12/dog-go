@@ -24,17 +24,6 @@ module.exports = function (app) {
     });
   });
 
-  // Create a new walker when a walker signs up
-  app.post('/api/walkers', (req, res) => {
-    db.Walker.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-    }).then((dbWalker) => {
-      res.json(dbWalker);
-    });
-  });
-
   // Create a new customer when a customer signs up
   app.post('/api/customers', (req, res) => {
     db.Customer.create({
