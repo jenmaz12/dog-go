@@ -23,7 +23,7 @@ $(document).ready(() => {
         type: 'GET',
       });
     },
-    deleteExample(id) {
+    deleteAppointment(id) {
       return $.ajax({
         url: `api/appointments/${id}`,
         type: 'DELETE',
@@ -31,7 +31,7 @@ $(document).ready(() => {
     },
   };
 
-  // refreshExamples gets new appointments from the db and repopulates the list
+  // refreshAppointments gets new appointments from the db and repopulates the list
   const refreshAppointments = function () {
     API.getAppointments().then((data) => {
       const appointments = data.map((appointment) => {
@@ -66,21 +66,21 @@ $(document).ready(() => {
     event.preventDefault();
 
     const appointment = {
-      text: $exampleText.val().trim(),
-      description: $exampleDescription.val().trim(),
+      date: appointmentDate.val().trim(),
+      startTime: appointmentTime.val().trim(),
     };
 
-    if (!(example.text && example.description)) {
+    if (!(appointment.date && appointment.startTime)) {
       alert('You must enter an example text and description!');
       return;
     }
 
-    API.saveExample(example).then(() => {
-      refreshExamples();
+    API.saveAppointment(appointment).then(() => {
+      refreshAppointments();
     });
 
-    $exampleText.val('');
-    $exampleDescription.val('');
+    appointmentDate.val('');
+    appointmentTime.val('');
   };
 
   // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -90,13 +90,12 @@ $(document).ready(() => {
       .parent()
       .attr('data-id');
 
-    API.deleteExample(idToDelete).then(() => {
-      refreshExamples();
+    API.deleteAppointment(idToDelete).then(() => {
+      refreshAppointments();
     });
   };
 
   // Add event listeners to the submit and delete buttons
   $submitBtn.on('click', handleFormSubmit);
-  $exampleList.on('click', '.delete', handleDeleteBtnClick);
-
+  appointmentList.on('click', '.delete', handleDeleteBtnClick);
 });
