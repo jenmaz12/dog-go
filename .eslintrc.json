@@ -8,7 +8,10 @@
         "extends": "airbnb-base",
         "rules": {
             "no-var":"warn",
-            "func-names":"off"
+            "func-names":"off",
+            "linebreak-style": "off",
+            "no-unused-vars": "warn",
+            "padded-blocks": "warn"
         }
     
     }
