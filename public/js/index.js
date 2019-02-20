@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  // Get references to page elements
+// Get references to page elements
   const appointmentDate = $('#appointment-date');
   const appointmentTime = $('#appointment-time');
   const $submitBtn = $('#submit');
