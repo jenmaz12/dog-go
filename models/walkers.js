@@ -1,17 +1,10 @@
 module.exports = function (sequelize, DataTypes) {
   const Walker = sequelize.define('Walker', {
-    firstName: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 50],
-      },
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1, 50],
+        len: [1, 100],
       },
     },
     email: {
@@ -21,6 +14,14 @@ module.exports = function (sequelize, DataTypes) {
         len: [1, 50],
       },
     },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 12],
+      },
+    },
+    timestamps: false,
   });
   return Walker;
 };

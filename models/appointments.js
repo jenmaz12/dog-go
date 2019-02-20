@@ -27,7 +27,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
-
+    timestamps: false,
   });
   return Appointment;
 };
