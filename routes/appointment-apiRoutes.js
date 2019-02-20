@@ -24,17 +24,6 @@ module.exports = function (app) {
     });
   });
 
-  // Create a new customer when a customer signs up
-  app.post('/api/customers', (req, res) => {
-    db.Customer.create({
-      name: req.body.name,
-      petName: req.body.petName,
-      email: req.body.email,
-      phone: req.body.phone,
-    }).then((dbCustomer) => {
-      res.json(dbCustomer);
-    });
-  });
 
   // update appointment when customer books it (available now false,
   // attach customerID to appointment, input overnight option if applicable)
