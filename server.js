@@ -1,15 +1,12 @@
 
-// Dependencies
-var express = require('express');
-var exphbs = require('express-handlebars');
+const express = require('express');
+const exphbs = require('express-handlebars');
 
-// Require models for syncing
-var db = require('./models');
+const db = require('./models');
 
-// Sets up express app
-var app = express();
-var PORT = process.env.PORT || 3000;
-var syncOptions = { force: false };
+const app = express();
+const PORT = process.env.PORT || 3000;
+const syncOptions = { force: false };
 
 require('dotenv').config();
 
@@ -51,3 +48,5 @@ db.sequelize.sync(syncOptions).then(() => {
     );
   });
 });
+
+module.exports = app;
