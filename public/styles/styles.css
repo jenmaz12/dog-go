@@ -10,6 +10,7 @@ h2 {
   color: white;
   height: 20%;
   padding: 2%;
+  
 }
 
 .dropDown {
@@ -34,10 +35,19 @@ h2 {
   display: block;
 }
 
-#mainButtons {
+#scheduleButton {
   margin: 2% 0% 0% 0%;
   height: 100px;
   width: 100%;
+  /* border: 2px solid black; */
+  background-image: url("../styles/images/calander.jpg");
+}
+
+#walkerButton {
+  margin: 2% 0% 0% 0%;
+  height: 100px;
+  width: 100%;
+  background-image: url("../styles/images/dogwalker.png");
 }
 
 * {
@@ -45,11 +55,10 @@ h2 {
 }
 
 body {
-  /* background-image: url("../styles/images/background.jpg"); */
-  background-color: skyblue;
+  background-image: url("../styles/images/mainbackground.jpg");
 }
 
 #copyright {
   text-align: center;
-  margin: 19% 0% 0% 0%;
+  margin: 10% 0% 0% 0%;
 }
