@@ -10,6 +10,7 @@ module.exports = function (app) {
 
   app.get('/customer', (req, res) => {
     res.render('forms/customer');
+<<<<<<< Updated upstream
   });
 
 <<<<<<< Updated upstream
@@ -19,10 +20,17 @@ module.exports = function (app) {
     // res.send('this works');
   });
 =======
+=======
+  });
+
+>>>>>>> Stashed changes
   app.get('/walker', (req, res) => {
     res.render('forms/walker');
   });
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 };
 
