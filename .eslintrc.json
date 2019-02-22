@@ -14,7 +14,9 @@
             "padded-blocks": "warn",
             "no-plusplus": "off",
             "no-console":"off",
-            "no-use-before-define":"off"
+            "no-use-before-define":"off",
+            "radix": "off",
+            "import/no-dynamic-require": "off"
         }
     
     }
