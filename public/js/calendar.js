@@ -38,7 +38,7 @@ function showCalendar(month, year) {
   tbl.innerHTML = '';
 
   // filing data about month and in the page via DOM.
-  monthAndYear.innerHTML = `${months[month]  } ${  year}`;
+  monthAndYear.innerHTML = `${months[month]} ${year}`;
   selectYear.value = year;
   selectMonth.value = month;
 
@@ -50,22 +50,27 @@ function showCalendar(month, year) {
 
     // creating individual cells, filing them up with data.
     for (let j = 0; j < 7; j++) {
+      // Fills the empty spaces
       if (i === 0 && j < firstDay) {
         const cell = document.createElement('td');
-        // const dataVajlue = $()
-        const cellText = document.createTextNode('');
-        cell.appendChild(cellText);
+        // let cellText = document.createElement(" ");
+        // cell.appendChild(cellText);
         row.appendChild(cell);
       } else if (date > daysInMonth) {
         break;
       } else {
+        // Creates the date
+        // <td align='center'><form><input type=submit value="click me" style="width:100%"></form></td>
         const cell = document.createElement('td');
-        const 
+        const cellBtn = document.createElement('btn');
+        $(cellBtn).addClass('btn btn-link');
         const cellText = document.createTextNode(date);
+        $(cellBtn).attr('value', date);
         if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
           cell.classList.add('bg-info');
-        } // color today's date
-        cell.appendChild(cellText);
+        } // Creating the button
+        cellBtn.appendChild(cellText);
+        cell.appendChild(cellBtn);
         row.appendChild(cell);
         date++;
       }
@@ -73,4 +78,19 @@ function showCalendar(month, year) {
 
     tbl.appendChild(row); // appending each row into calendar body.
   }
+
+  $('btn').click(() => {
+    const btnValue = $('btn').val();
+    console.log('clicked!');
+    // get date
+    const currentYear = parseInt(selectYear.value);
+    let currentMonth = parseInt(selectMonth.value);
+    // Correct the month number from value
+    currentMonth++;
+
+    if (currentMonth < 10) {
+      const monthSyntax = (`0${ currentMonth}`);
+      console.log(`${currentYear}-${monthSyntax}-${btnValue}`);
+    } else { console.log(`${currentYear }-${currentMonth }-${ btnValue}`); }
+  });
 }
