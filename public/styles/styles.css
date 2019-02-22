@@ -9,7 +9,6 @@ h2 {
   background-image: url("../styles/images/Green\ and\ Blue.jpg");
   height: 5%;
   padding: 2%;
-  
 }
 
 .dropDown {
@@ -51,12 +50,10 @@ h2 {
 
 .container{
   margin: 2% 0% 0% 2%;
-
 }
 
 .inner {
   overflow: hidden;
-
 }
 
 .inner img{
@@ -66,20 +63,6 @@ h2 {
 .inner:hover img {
   transform: scale(1.5);
 }
-/* #scheduleButton {
-  margin: 2% 0% 0% 0%;
-  height: 100px;
-  width: 100%;
-  /* border: 2px solid black; */
-  /* background-image: url("../styles/images/calander.jpg"); */
-/* } */
-
-/* #walkerButton {
-  margin: 2% 0% 0% 0%;
-  height: 100px;
-  width: 100%;
-  background-image: url("../styles/images/dogwalker.png");
-} */ 
 
 * {
   cursor: url("images/paw.cur"), default;
@@ -94,8 +77,8 @@ body {
   margin: 10% 0% 0% 0%;
 }
 
-div {
+#walkerForm {
   border-radius: 5px;
   background-color: #f2f2f2;
-  padding: 20px;
+  padding: 20px; 
 }
