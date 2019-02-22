@@ -1,7 +1,11 @@
 {
   "development": {
     "username": "root",
+<<<<<<< Updated upstream
     "password": "Kuroinoame79",
+=======
+    "password": "WaW920338",
+>>>>>>> Stashed changes
     "database": "dogGo",
     "host": "localhost",
     "dialect": "mysql"
