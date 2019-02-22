@@ -5,10 +5,9 @@
 h2 {
   text-align: center;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 20%;
-  background-color: silver;
-  color: white;
-  height: 20%;
+  font-weight: 5%;
+  background-image: url("../styles/images/Green\ and\ Blue.jpg");
+  height: 5%;
   padding: 2%;
   
 }
@@ -35,20 +34,52 @@ h2 {
   display: block;
 }
 
-#scheduleButton {
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 2% 0% 0% 0%;
+}
+
+.container{
+  margin-top: 8%;
+}
+
+.container{
+  position: relative;
+}
+
+.container{
+  margin: 2% 0% 0% 2%;
+
+}
+
+.inner {
+  overflow: hidden;
+
+}
+
+.inner img{
+  transition: all 1.5s ease;
+}
+
+.inner:hover img {
+  transform: scale(1.5);
+}
+/* #scheduleButton {
   margin: 2% 0% 0% 0%;
   height: 100px;
   width: 100%;
   /* border: 2px solid black; */
-  background-image: url("../styles/images/calander.jpg");
-}
+  /* background-image: url("../styles/images/calander.jpg"); */
+/* } */
 
-#walkerButton {
+/* #walkerButton {
   margin: 2% 0% 0% 0%;
   height: 100px;
   width: 100%;
   background-image: url("../styles/images/dogwalker.png");
-}
+} */ 
 
 * {
   cursor: url("../styles/images/paw.cur"), default;

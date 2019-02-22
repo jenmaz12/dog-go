@@ -8,4 +8,11 @@ module.exports = function (app) {
     res.render('index');
     // res.send('this works');
   });
+
+  app.get('/calendar', (req, res) => {
+    // send back the home page
+    res.render('calendar');
+    // res.send('this works');
+  });
 };
+
