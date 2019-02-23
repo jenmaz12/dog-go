@@ -1,3 +1,4 @@
+
 const today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
@@ -75,7 +76,6 @@ function showCalendar(month, year) {
         date++;
       }
     }
-
     tbl.appendChild(row); // appending each row into calendar body.
   }
 
@@ -98,3 +98,39 @@ function showCalendar(month, year) {
     // showAppointments();
   });
 }
+
+// split at :
+// parseInt minutes
+// add thirty
+// stringify minutes
+// join with :
+//
+
+function createIncrements(startTime) {
+  const increments = [];
+  moment().format('MMMM Do YYYY, h:mm:ss a');
+  const moStart = moment(startTime);
+  for (let i = 0; i < 16; i++) {
+    console.log(moStart);
+    increments.push(moment(moStart.add(30, 'm').format('MMMM Do YYYY, h:mm:ss a')));
+  }
+  console.log(increments);
+}
+
+createIncrements('2019-02-24 09:00');
+
+function showAppointments(day) {
+  // const startRange;
+  // const endRange;
+  // const timeRange =
+  // $.get(`/api/appointments/${day}`, (data) => {
+  //   bookedAppts.push(data);
+  //   console.log(bookedAppts);
+  // });
+
+}
+// pull all appointments from appointments table that match the date
+// store in a local variable
+// run for loop with conditional to populate the modal with timeslot buttons
+// conditional checks to see if the appointment exists in the appointments table
+// if exists, don't create the button - continue javascript statement

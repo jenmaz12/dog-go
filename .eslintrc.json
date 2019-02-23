@@ -16,7 +16,8 @@
             "no-console":"off",
             "no-use-before-define":"off",
             "radix": "off",
-            "import/no-dynamic-require": "off"
+            "import/no-dynamic-require": "off",
+            "max-len":"off"
         }
     
     }
