@@ -1,3 +1,4 @@
+
 const today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
@@ -63,7 +64,7 @@ function showCalendar(month, year) {
         // <td align='center'><form><input type=submit value="click me" style="width:100%"></form></td>
         const cell = document.createElement('td');
         const cellBtn = document.createElement('btn');
-        $(cellBtn).addClass('btn btn-link');
+        $(cellBtn).addClass('btn btn-link dayBtn');
         const cellText = document.createTextNode(date);
         $(cellBtn).attr('value', date);
         if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
@@ -75,13 +76,16 @@ function showCalendar(month, year) {
         date++;
       }
     }
-
     tbl.appendChild(row); // appending each row into calendar body.
   }
 
-  $('btn').click(() => {
+  $('.dayBtn').click(() => {
     // THIS IS THE PROBLEM
-    const btnValue = this.innerHTML;
+    let btnValue = $(this).text();
+    console.log(btnValue);
+    if (parseInt(btnValue) < 10) {
+      btnValue = `0${btnValue}`;
+    }
     console.log('clicked!');
     // Correct the month number from index
     currentMonth++;
@@ -96,3 +100,49 @@ function showCalendar(month, year) {
     showAppointments();
   });
 }
+
+// split at :
+// parseInt minutes
+// add thirty
+// stringify minutes
+// join with :
+//
+
+function createIncrements(startTime) {
+  const increments = [];
+  moment().format('MMMM Do YYYY, h:mm:ss a');
+  let moStart = moment(startTime);
+  for (let i = 0; i < 16; i++) {
+    const increment = {
+      startTime: '',
+    };
+    //moStart = moStart.add(30, 'm');
+
+    //ERROR is in the Add for moment here.
+    console.log(moStart);
+    moStart.add(30, 'm');
+    console.log(moStart);
+
+    increment.startTime = moStart;
+    increments.push(increment);
+  }
+  console.log(increments);
+}
+
+createIncrements('2019-02-24 09:00');
+
+function showAppointments(day) {
+  // const startRange;
+  // const endRange;
+  // const timeRange =
+  // $.get(`/api/appointments/${day}`, (data) => {
+  //   bookedAppts.push(data);
+  //   console.log(bookedAppts);
+  // });
+
+}
+// pull all appointments from appointments table that match the date
+// store in a local variable
+// run for loop with conditional to populate the modal with timeslot buttons
+// conditional checks to see if the appointment exists in the appointments table
+// if exists, don't create the button - continue javascript statement

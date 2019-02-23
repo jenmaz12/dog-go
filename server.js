@@ -1,6 +1,7 @@
 
 const express = require('express');
 const exphbs = require('express-handlebars');
+const moment = require('moment');
 
 const db = require('./models');
 

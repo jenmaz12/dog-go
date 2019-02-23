@@ -2,10 +2,22 @@
 const db = require('../models');
 
 module.exports = function (app) {
-  // Get all available appointments
+  // Get all available appointments on the day
   app.get('/api/appointments', (req, res) => {
     db.Appointment.findAll({
       where: {
+        date: req.body.date,
+        available: true,
+      },
+    }).then((dbAppointments) => {
+      res.json(dbAppointments);
+    });
+  });
+
+  app.get('/api/appointments/:date', (req, res) => {
+    db.Appointment.findAll({
+      where: {
+        date: req.params.date,
         available: true,
       },
     }).then((dbAppointments) => {

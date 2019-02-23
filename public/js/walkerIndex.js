@@ -26,7 +26,7 @@ $(document).ready(() => {
     });
   }
 
-  // A function for creating an author. Calls getAuthors upon completion
+  // A function for creating an walker. Calls getAuthors upon completion
   function upsertWalker(walkerData) {
     $.post('/api/authors', walkerData)
       .then(getWalkers);
