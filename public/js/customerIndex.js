@@ -6,6 +6,7 @@ $(document).ready(() => {
   const newPhoneNumber = $('#number');
   // const customerList = $('tbody');
   const CustomerContainer = $('#customer-container');
+  const url = ('/calendar');
 
   // Adding event listeners to the form to create a new object, and the button to delete a customer
   $(document).on('click', '#customer-form', handleCustomerFormSubmit);
@@ -17,6 +18,8 @@ $(document).ready(() => {
     if (!nameInput.val()) {
       renderEmpty();
     }
+    // show appointments
+    showAppointments();
     // Calling the upsertAuthor function and passing in the value of the name input
     upsertCustomer(
       {
@@ -30,7 +33,8 @@ $(document).ready(() => {
     // A function for creating an author. Calls getAuthors upon completion
     function upsertCustomer(newCustomer) {
       $.post('/api/customers', newCustomer)
-        .then(showAppointments);
+      // this will change
+        .then(window.location = url);
     }
 
     // Function for handling what to render when there are no authors
@@ -45,6 +49,7 @@ $(document).ready(() => {
       const newDiv = $('<div>');
       newDiv.text('Customer:');
       newDiv.text(nameInput.val());
+      // this will change
       CustomerContainer.append(newDiv);
     }
   }
