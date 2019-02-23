@@ -64,9 +64,9 @@ function showCalendar(month, year) {
         // <td align='center'><form><input type=submit value="click me" style="width:100%"></form></td>
         const cell = document.createElement('td');
         const cellBtn = document.createElement('btn');
-        $(cellBtn).addClass('btn btn-link dayBtn');
+        $(cellBtn).addClass('btn btn-link');
         const cellText = document.createTextNode(date);
-        $(cellBtn).attr('value', date);
+        $(cellBtn).attr('data-date', date);
         if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
           cell.classList.add('bg-info');
         } // Creating the button
@@ -79,25 +79,23 @@ function showCalendar(month, year) {
     tbl.appendChild(row); // appending each row into calendar body.
   }
 
-  $('.dayBtn').click(() => {
+  $('.btn').click(function () {
     // THIS IS THE PROBLEM
-    let btnValue = $(this).text();
+    const btnValue = $(this).attr('data-date');
+    // btnValue = parseInt(btnValue);
     console.log(btnValue);
-    if (parseInt(btnValue) < 10) {
-      btnValue = `0${btnValue}`;
-    }
-    console.log('clicked!');
     // Correct the month number from index
     currentMonth++;
 
-    if (currentMonth < 10) {
+    if (currentMonth < 10 || btnValue < 10) {
       const monthSyntax = (`0${currentMonth}`);
-      console.log(`${currentYear}-${monthSyntax}-${btnValue}`);
+      const btnSyntax = (`0${btnValue}`);
+      console.log(`${currentYear}-${monthSyntax}-${btnSyntax}`);
     } else {
       console.log(`${currentYear}-${currentMonth}-${btnValue}`);
     }
 
-    showAppointments();
+    // showAppointments();
   });
 }
 
@@ -111,20 +109,10 @@ function showCalendar(month, year) {
 function createIncrements(startTime) {
   const increments = [];
   moment().format('MMMM Do YYYY, h:mm:ss a');
-  let moStart = moment(startTime);
+  const moStart = moment(startTime);
   for (let i = 0; i < 16; i++) {
-    const increment = {
-      startTime: '',
-    };
-    //moStart = moStart.add(30, 'm');
-
-    //ERROR is in the Add for moment here.
     console.log(moStart);
-    moStart.add(30, 'm');
-    console.log(moStart);
-
-    increment.startTime = moStart;
-    increments.push(increment);
+    increments.push(moment(moStart.add(30, 'm').format('MMMM Do YYYY, h:mm:ss a')));
   }
   console.log(increments);
 }

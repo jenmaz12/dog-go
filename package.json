@@ -17,6 +17,7 @@
     "moment": "^2.24.0",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.4",
+    "popmotion": "^8.6.3",
     "sequelize": "^4.41.2"
   },
   "devDependencies": {
