@@ -1,10 +1,10 @@
 <div id="home">
   <div class="container">
     <div class="row">
-      <div class="col-8 offset-2">
+      <div class="col-8 offset-4">
         <div class="row">
           <div class="col-12 col-md-8">
-            <img src="styles/images/logo.png" alt="Dog-Go-Logo" width="200px" />
+            <img src="styles/images/logo.png" alt="Dog-Go-Logo" width="150px" />
           </div>
           <div class="col-6 col-md-4">
             <div class="dropdown">
@@ -14,49 +14,45 @@
                 <div class="dropDown"></div>
               </span>
               <div class="dropdown-content">
-                <p>Schedule A Walk</p>
-                <p>Become A Dog Walker</p>
-                <p>About Us</p>
-                <p>Contact Us</p>
-              </div>
+                    <a href="/">Home</a>
+                    <br>
+                    <a href="/customer">Schedule A Walk</a>
+                    <br>
+                    <a href="/walker">Become A Dog Walker</a>
+                    <br>
+                    <a href="calander">View Our Calander</a>
+                </div>
             </div>
           </div>
         </div>
-        <h1>{{msg}}</h1>
-
-
-
-
-        <a rel="round-corners" class="button round-corners">Round Corners
+        <a rel="round-corners" class="button round-corners">
           <h2>You Do The Talkin', We Do The Walkin'</h2>
         </a>
         {{!-- <button id="scheduleButton">Schedule A Walk --}}
-
-            <div class="row">
-              <div class="col">
-                 <div class="row justfy-content-right">
-            <div class="col-md-4"></div>
-            <div class="card shadow" style="width: 20rem;">
-              <div class="inner">
-                <img src="styles/images/dog1.jpg" class="card-img-top" alt="card_image cap">
-                  </div>
-              <div class="card-body">
-                <h5 class="card-title">Walk a DOGO</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a href="/customer" class="btn btn-success">Schedule a Walk!</a>
-              </div>
-            </div>
-
-              </div>
-              </div>
-              <div class="col">
-                 <div class="row justfy-content-left">
+        <div class="row">
+          <div class="col-6 col-md-4 ml-4">
+            <div class="row justfy-content-right">
               <div class="col-md-4"></div>
               <div class="card shadow" style="width: 20rem;">
                 <div class="inner">
-                  <img src="styles/images/dog2.jpg" class="card-img-top" alt="card_image cap">
-                     </div>
+                  <img src="styles/images/dog1.jpg" class="card-img-top" alt="card_image cap">
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Walk a DOGO</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a href="/customer" class="btn btn-success">Schedule a Walk!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 ml-4">
+            <div class="row justfy-content-left">
+              <div class="col-md-4"></div>
+              <div class="card shadow" style="width: 20rem; height: 370px;">
+                <div class="inner">
+                  <img src="styles/images/dog1.jpg" class="card-img-top" alt="card_image cap">
+                </div>
                 <div class="card-body">
                   <h5 class="card-title">Become a Walker today!</h5>
                   <p class="card-text">Some quick example text </p>
@@ -65,29 +61,29 @@
               </div>
             </div>
           </div>
-
-                </div>
-              </div>
-            </div>
-
-          {{!-- <a href="calendar.html"></a> --}}
-          {{!-- <button id="walkerButton">Become A Dog Walker --}}
-          {{!-- <h3>Examples:</h3> --}}
-          <ul id="example-list" class="list-group">
-            {{#each examples}}
-            <li data-id="{{this.id}}" class="list-group-item">
-              <a href="example/{{this.id}}">{{this.text}}</a>
-              <button class="btn btn-danger float-right delete">ｘ</button>
-            </li>
-            {{/each}}
-          </ul>
         </div>
       </div>
     </div>
   </div>
-  <div id="copyright">
-    &copy; Copyright 2019 GroupE Web Design
-  </div>
+</div>
+{{!-- <a href="calendar.html"></a> --}}
+{{!-- <button id="walkerButton">Become A Dog Walker --}}
+{{!-- <h3>Examples:</h3> --}}
+<ul id="example-list" class="list-group">
+  {{#each examples}}
+  <li data-id="{{this.id}}" class="list-group-item">
+    <a href="example/{{this.id}}">{{this.text}}</a>
+    <button class="btn btn-danger float-right delete">ｘ</button>
+  </li>
+  {{/each}}
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="copyright">
+  &copy; Copyright 2019 GroupE Web Design
+</div>
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="/js/index.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
