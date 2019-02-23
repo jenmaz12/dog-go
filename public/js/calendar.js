@@ -65,7 +65,7 @@ function showCalendar(month, year) {
         const cellBtn = document.createElement('btn');
         $(cellBtn).addClass('btn btn-link');
         const cellText = document.createTextNode(date);
-        $(cellBtn).attr('value', date);
+        $(cellBtn).attr('data-date', date);
         if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
           cell.classList.add('bg-info');
         } // Creating the button
@@ -79,20 +79,22 @@ function showCalendar(month, year) {
     tbl.appendChild(row); // appending each row into calendar body.
   }
 
-  $('btn').click(() => {
+  $('.btn').click(function () {
     // THIS IS THE PROBLEM
-    const btnValue = this.innerHTML;
-    console.log('clicked!');
+    const btnValue = $(this).attr('data-date');
+    // btnValue = parseInt(btnValue);
+    console.log(btnValue);
     // Correct the month number from index
     currentMonth++;
 
-    if (currentMonth < 10) {
+    if (currentMonth < 10 || btnValue < 10) {
       const monthSyntax = (`0${currentMonth}`);
-      console.log(`${currentYear}-${monthSyntax}-${btnValue}`);
+      const btnSyntax = (`0${btnValue}`);
+      console.log(`${currentYear}-${monthSyntax}-${btnSyntax}`);
     } else {
       console.log(`${currentYear}-${currentMonth}-${btnValue}`);
     }
 
-    showAppointments();
+    // showAppointments();
   });
 }
