@@ -20,7 +20,85 @@
         </div>
     </div>
     <div id="walkerForm">
-        <form>
+
+
+<div id="walkerForm" class="input-form">
+    <div class="container2">
+        <div class="inner">
+            <h1>Fill it out</h1>
+            {{!-- <p>Please fill out the form below because that's what we really need you to do. Thanks.</p> --}}
+            <form>
+                <span class="msg">Full name please!</span>
+                <input type="text" placeholder="Name" class="txtfld" id="customerName" name="Name">
+                <input type="test" placeholder="Email" class="txtfld" id="email" email="email">
+                <input type="text" placeholder="Phone Number" class="txtfld" id="number" email="email">
+                {{!-- <button type="submit" value="continue" id="customer-form">Continue</button> --}}
+                {{!-- <button type="delete" value="delete" id="delete-customer">Delete Account</button> --}}
+
+
+
+                <input type="submit" value="Submit" class="btn" id="customer-form">
+            </form>
+            <hr>
+            <div id="customer-container">
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+
+    <script>
+        const container2 = popmotion.styler(document.querySelector('.container2'));
+        const formElements = document.querySelector('.inner');
+        const msgPop = popmotion.styler(document.querySelector('.msg'));
+
+        const myAnim = popmotion.tween({
+            from: {
+                scale: .7,
+                opacity: 0,
+                y: -300
+            },
+            to: {
+                scale: 1,
+                opacity: 1,
+                y: 0
+            },
+            duration: 1000
+        })
+            
+        
+        const myAnim2 = popmotion.keyframes({
+            values: [
+                
+                   { y: -50, opacity: 0 },
+                   { y: -20, opacity: 1 },
+                   { y: -20, opacity: 1 },
+                   { y: 0, opacity: 0 },
+            
+        ],
+
+            times: [0, .2, .8, 1],      
+            duration: 3000
+        })
+
+        myAnim.start({
+            update: container2.set,
+            complete: () => {myAnim2.start(msgPop.set)}
+        })
+
+        const stylers = Array
+            .from(formElements.children)
+            .map(popmotion.styler);
+
+        const animations = Array(stylers.length)
+            .fill(popmotion.spring({ from: 100, to: 0 }));
+
+        popmotion.stagger(animations, 100)
+            .start((v) => v.forEach((x, i) => stylers[i].set('y', x)));
+
+    </script>
+
+        {{!-- <form>
             <label for="name">Name</label>
             <input type="text" id="walkerName" name="name" placeholder="Name">
 
@@ -31,6 +109,6 @@
             <input type="text" id="walkerPhoneNumber" email="Phone Number" placeholder="Phone Number">
 
             <button type="continue" value="continue">Continue</button>
-        </form>
+        </form> --}}
     </div>
        
