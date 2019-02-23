@@ -80,17 +80,19 @@ function showCalendar(month, year) {
   }
 
   $('btn').click(() => {
-    const btnValue = $('btn').val();
+    // THIS IS THE PROBLEM
+    const btnValue = this.innerHTML;
     console.log('clicked!');
-    // get date
-    const currentYear = parseInt(selectYear.value);
-    let currentMonth = parseInt(selectMonth.value);
-    // Correct the month number from value
+    // Correct the month number from index
     currentMonth++;
 
     if (currentMonth < 10) {
-      const monthSyntax = (`0${ currentMonth}`);
+      const monthSyntax = (`0${currentMonth}`);
       console.log(`${currentYear}-${monthSyntax}-${btnValue}`);
-    } else { console.log(`${currentYear }-${currentMonth }-${ btnValue}`); }
+    } else {
+      console.log(`${currentYear}-${currentMonth}-${btnValue}`);
+    }
+
+    showAppointments();
   });
 }
