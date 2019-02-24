@@ -64,7 +64,7 @@ function showCalendar(month, year) {
         // <td align='center'><form><input type=submit value="click me" style="width:100%"></form></td>
         const cell = document.createElement('td');
         const cellBtn = document.createElement('btn');
-        $(cellBtn).addClass('btn btn-link');
+        $(cellBtn).addClass('btn btn-link dayBtn');
         const cellText = document.createTextNode(date);
         $(cellBtn).attr('data-date', date);
         if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
@@ -78,7 +78,7 @@ function showCalendar(month, year) {
     }
     tbl.appendChild(row); // appending each row into calendar body.
   }
-  $('.btn').click(function () {
+  $('.dayBtn').click(function () {
     // THIS IS THE PROBLEM
     const btnValue = $(this).attr('data-date');
     // btnValue = parseInt(btnValue);
@@ -103,30 +103,41 @@ function showCalendar(month, year) {
     console.log(thisDate);
 
     // create half hour appts 9 to 5 on this date
-    createIncrements(`${thisDate} 09:00`);
+    createIncrements(`${thisDate} 09:00:00`);
+    // compare increments to appointments on this date and only show ones that are not in the db
+    showAppointments(thisDate);
   });
 }
 let increments = [];
 function createIncrements(startTime) {
   increments = [];
-  moment().format('MMMM Do YYYY, h:mm:ss a');
+  // eslint-disable-next-line no-undef
+  moment().format('YYYY-MM-DD HH:mm:ss');
+  // eslint-disable-next-line no-undef
   const moStart = moment(startTime);
   increments.push(moStart);
   for (let i = 0; i < 16; i++) {
-    increments.push(moment(moStart.add(30, 'm').format('MMMM Do YYYY, h:mm:ss a')));
+    // creates a new moment for each 30 min timeslot because .add does not change moStart
+    // pushes to increments array
+    // eslint-disable-next-line no-undef
+    increments.push(moment(moStart.add(30, 'm').format('YYYY-MM-DD HH:mm:ss')));
   }
-  console.log(increments);
 }
 
 function showAppointments(day) {
-  // const startRange;
-  // const endRange;
-  // const timeRange =
-  // $.get(`/api/appointments/${day}`, (data) => {
-  //   bookedAppts.push(data);
-  //   console.log(bookedAppts);
-  // });
-
+  const bookedAppts = [];
+  const availableAppts = [];
+  $.get(`/api/appointments/${day}`, (data) => {
+    for (let i = 0; i < data.length; i++) {
+      bookedAppts.push(`${data[i].date} ${data[i].startTime}`);
+    }
+    for (let j = 0; j < increments.length; j++) {
+      if (bookedAppts.indexOf(increments[j]._i) === -1) {
+        availableAppts.push(increments[j]._i);
+      }
+    }
+    console.log(availableAppts);
+  });
 }
 // pull all appointments from appointments table that match the date
 // store in a local variable

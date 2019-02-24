@@ -17,7 +17,8 @@
             "no-use-before-define":"off",
             "radix": "off",
             "import/no-dynamic-require": "off",
-            "max-len":"off"
+            "max-len":"off",
+            "no-underscore-dangle":"off"
         }
     
     }
