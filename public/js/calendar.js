@@ -78,7 +78,6 @@ function showCalendar(month, year) {
     }
     tbl.appendChild(row); // appending each row into calendar body.
   }
-
   $('.btn').click(function () {
     // THIS IS THE PROBLEM
     const btnValue = $(this).attr('data-date');
@@ -86,38 +85,38 @@ function showCalendar(month, year) {
     console.log(btnValue);
     // Correct the month number from index
     currentMonth++;
-
-    if (currentMonth < 10 || btnValue < 10) {
-      const monthSyntax = (`0${currentMonth}`);
-      const btnSyntax = (`0${btnValue}`);
-      console.log(`${currentYear}-${monthSyntax}-${btnSyntax}`);
+    let monthSyntax;
+    let btnSyntax;
+    if (currentMonth < 10) {
+      monthSyntax = (`0${currentMonth}`);
     } else {
-      console.log(`${currentYear}-${currentMonth}-${btnValue}`);
+      monthSyntax = currentMonth;
     }
 
-    // showAppointments();
+    if (btnValue < 10) {
+      btnSyntax = (`0${btnValue}`);
+    } else {
+      btnSyntax = btnValue;
+    }
+
+    const thisDate = `${currentYear}-${monthSyntax}-${btnSyntax}`;
+    console.log(thisDate);
+
+    // create half hour appts 9 to 5 on this date
+    createIncrements(`${thisDate} 09:00`);
   });
 }
-
-// split at :
-// parseInt minutes
-// add thirty
-// stringify minutes
-// join with :
-//
-
+let increments = [];
 function createIncrements(startTime) {
-  const increments = [];
+  increments = [];
   moment().format('MMMM Do YYYY, h:mm:ss a');
   const moStart = moment(startTime);
+  increments.push(moStart);
   for (let i = 0; i < 16; i++) {
-    console.log(moStart);
     increments.push(moment(moStart.add(30, 'm').format('MMMM Do YYYY, h:mm:ss a')));
   }
   console.log(increments);
 }
-
-createIncrements('2019-02-24 09:00');
 
 function showAppointments(day) {
   // const startRange;
