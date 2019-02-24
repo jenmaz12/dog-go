@@ -84,13 +84,12 @@ function showCalendar(month, year) {
     // btnValue = parseInt(btnValue);
     console.log(btnValue);
     // Correct the month number from index
-    currentMonth++;
     let monthSyntax;
     let btnSyntax;
-    if (currentMonth < 10) {
-      monthSyntax = (`0${currentMonth}`);
+    if (currentMonth + 1 < 10) {
+      monthSyntax = (`0${currentMonth + 1}`);
     } else {
-      monthSyntax = currentMonth;
+      monthSyntax = currentMonth + 1;
     }
 
     if (btnValue < 10) {
