@@ -107,7 +107,7 @@ function showCalendar(month, year) {
     showAppointments(thisDate);
   });
 }
-let increments = [];
+let increments;
 function createIncrements(startTime) {
   increments = [];
   // eslint-disable-next-line no-undef
@@ -124,19 +124,39 @@ function createIncrements(startTime) {
 }
 
 function showAppointments(day) {
+  // create arrays for booked, available, and walkers
   const bookedAppts = [];
   const availableAppts = [];
+  const walkers = [];
+  // get walkers from db and push into walkers array
+  $.get('api/walkers', (data) => {
+    walkers.push(data);
+  });
+  // get appts from db and push into bookedAppts array in correct format
   $.get(`/api/appointments/${day}`, (data) => {
     for (let i = 0; i < data.length; i++) {
       bookedAppts.push(`${data[i].date} ${data[i].startTime}`);
     }
-    for (let j = 0; j < increments.length; j++) {
-      if (bookedAppts.indexOf(increments[j]._i) === -1) {
-        availableAppts.push(increments[j]._i);
+  });
+  // loop through timeslots
+  for (let j = 0; j < increments.length; j++) {
+    const times = [];
+    // loop through bookedAppts for each increment
+    for (let i = 0; i < bookedAppts.length; i++) {
+      // if the bookedAppt is equal to the increment, then push test to the times array
+      if (bookedAppts[i] === increments[j]._i) {
+        times.push('test');
       }
     }
-    console.log(availableAppts);
-  });
+    console.log(times);
+    console.log(walkers);
+    // if the times array length for that increment is less than the number of walkers (walkers length),
+    // then the timeslot is available
+    if (times.length < walkers.length) {
+      availableAppts.push(increments[j]._i);
+    }
+  }
+  console.log(availableAppts);
 }
 // pull all appointments from appointments table that match the date
 // store in a local variable
