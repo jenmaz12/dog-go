@@ -1,105 +1,80 @@
-<div class="col-8 offset-2">
-    <div class="row">
-        <div class="col-12 col-md-8">
-            <img src="styles/images/logo.png" alt="Dog-Go-Logo" width="200px" />
-        </div>
-        <div class="col-6 col-md-4">
-            <div class="dropdown">
-                <span>
-                    <div class="dropDown"></div>
-                    <div class="dropDown"></div>
-                    <div class="dropDown"></div>
-                </span>
-                <div class="dropdown-content">
-                    <a href="/">Home</a>
-                    <br>
-                    <a href="/customer">Schedule A Walk</a>
-                    <br>
-                    <a href="/walker">Become A Dog Walker</a>
-                    <br>
-                    <a href="../calander">View Our Calander</a>
+<div class="container">
+    <div id="walkerForm">
+        <div id="walkerForm" class="input-form">
+            <div class="container2">
+                <div class="inner">
+                    <h1>Fill it out</h1>
+                    {{!-- <p>Please fill out the form below because that's what we really need you to do. Thanks.</p> --}}
+                    <form>
+                        <span class="msg">Full name please!</span>
+                        <input type="text" placeholder="Name" class="txtfld" id="customerName" name="Name">
+                        <input type="test" placeholder="Email" class="txtfld" id="email" email="email">
+                        <input type="text" placeholder="Phone Number" class="txtfld" id="number" email="email">
+                        {{!-- <button type="submit" value="continue" id="customer-form">Continue</button> --}}
+                        {{!-- <button type="delete" value="delete" id="delete-customer">Delete Account</button> --}}
+
+
+
+                        <input type="submit" value="Submit" class="btn" id="customer-form">
+                    </form>
+                    <hr>
+                    <div id="customer-container">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="walkerForm">
+        <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+
+        <script>
+            const container2 = popmotion.styler(document.querySelector('.container2'));
+            const formElements = document.querySelector('.inner');
+            const msgPop = popmotion.styler(document.querySelector('.msg'));
+
+            const myAnim = popmotion.tween({
+                from: {
+                    scale: .7,
+                    opacity: 0,
+                    y: -300
+                },
+                to: {
+                    scale: 1,
+                    opacity: 1,
+                    y: 0
+                },
+                duration: 1000
+            })
 
 
-<div id="walkerForm" class="input-form">
-    <div class="container2">
-        <div class="inner">
-            <h1>Fill it out</h1>
-            {{!-- <p>Please fill out the form below because that's what we really need you to do. Thanks.</p> --}}
-            <form>
-                <span class="msg">Full name please!</span>
-                <input type="text" placeholder="Name" class="txtfld" id="customerName" name="Name">
-                <input type="test" placeholder="Email" class="txtfld" id="email" email="email">
-                <input type="text" placeholder="Phone Number" class="txtfld" id="number" email="email">
-                {{!-- <button type="submit" value="continue" id="customer-form">Continue</button> --}}
-                {{!-- <button type="delete" value="delete" id="delete-customer">Delete Account</button> --}}
+            const myAnim2 = popmotion.keyframes({
+                values: [
 
+                    { y: -50, opacity: 0 },
+                    { y: -20, opacity: 1 },
+                    { y: -20, opacity: 1 },
+                    { y: 0, opacity: 0 },
 
+                ],
 
-                <input type="submit" value="Submit" class="btn" id="customer-form">
-            </form>
-            <hr>
-            <div id="customer-container">
-            </div>
-        </div>
-    </div>
-</div>
-    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+                times: [0, .2, .8, 1],
+                duration: 3000
+            })
 
-    <script>
-        const container2 = popmotion.styler(document.querySelector('.container2'));
-        const formElements = document.querySelector('.inner');
-        const msgPop = popmotion.styler(document.querySelector('.msg'));
+            myAnim.start({
+                update: container2.set,
+                complete: () => { myAnim2.start(msgPop.set) }
+            })
 
-        const myAnim = popmotion.tween({
-            from: {
-                scale: .7,
-                opacity: 0,
-                y: -300
-            },
-            to: {
-                scale: 1,
-                opacity: 1,
-                y: 0
-            },
-            duration: 1000
-        })
-            
-        
-        const myAnim2 = popmotion.keyframes({
-            values: [
-                
-                   { y: -50, opacity: 0 },
-                   { y: -20, opacity: 1 },
-                   { y: -20, opacity: 1 },
-                   { y: 0, opacity: 0 },
-            
-        ],
+            const stylers = Array
+                .from(formElements.children)
+                .map(popmotion.styler);
 
-            times: [0, .2, .8, 1],      
-            duration: 3000
-        })
+            const animations = Array(stylers.length)
+                .fill(popmotion.spring({ from: 100, to: 0 }));
 
-        myAnim.start({
-            update: container2.set,
-            complete: () => {myAnim2.start(msgPop.set)}
-        })
+            popmotion.stagger(animations, 100)
+                .start((v) => v.forEach((x, i) => stylers[i].set('y', x)));
 
-        const stylers = Array
-            .from(formElements.children)
-            .map(popmotion.styler);
-
-        const animations = Array(stylers.length)
-            .fill(popmotion.spring({ from: 100, to: 0 }));
-
-        popmotion.stagger(animations, 100)
-            .start((v) => v.forEach((x, i) => stylers[i].set('y', x)));
-
-    </script>
+        </script>
 
         {{!-- <form>
             <label for="name">Name</label>
@@ -114,4 +89,5 @@
             <button type="continue" value="continue">Continue</button>
         </form> --}}
     </div>
+</div>
 </div>
