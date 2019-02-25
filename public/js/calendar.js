@@ -79,10 +79,8 @@ function showCalendar(month, year) {
     tbl.appendChild(row); // appending each row into calendar body.
   }
   $('.dayBtn').click(function () {
-    // THIS IS THE PROBLEM
     const btnValue = $(this).attr('data-date');
-    // btnValue = parseInt(btnValue);
-    console.log(btnValue);
+
     // Correct the month number from index
     let monthSyntax;
     let btnSyntax;
@@ -107,7 +105,7 @@ function showCalendar(month, year) {
     showAppointments(thisDate);
   });
 }
-let increments = [];
+let increments;
 function createIncrements(startTime) {
   increments = [];
   // eslint-disable-next-line no-undef
@@ -124,22 +122,53 @@ function createIncrements(startTime) {
 }
 
 function showAppointments(day) {
+  console.log(increments);
+  // create arrays for booked, available, and walkers
   const bookedAppts = [];
   const availableAppts = [];
+  const walkers = [];
+  // get walkers from db and push into walkers array
+  $.get('api/walkers', (data) => {
+    walkers.push(data);
+  });
+  console.log(walkers);
+  // get appts from db and push into bookedAppts array in correct format
   $.get(`/api/appointments/${day}`, (data) => {
     for (let i = 0; i < data.length; i++) {
       bookedAppts.push(`${data[i].date} ${data[i].startTime}`);
     }
+    // loop through timeslots
     for (let j = 0; j < increments.length; j++) {
-      if (bookedAppts.indexOf(increments[j]._i) === -1) {
+      const times = [];
+      // loop through bookedAppts for each increment
+      for (let i = 0; i < bookedAppts.length; i++) {
+        // if the bookedAppt is equal to the increment, then push test to the times array
+        if (bookedAppts[i] === increments[j]._i) {
+          times.push('test');
+        }
+      }
+      // console.log(times);
+      // console.log(walkers);
+      // if the times array length for that increment is less than the number of walkers (walkers length),
+      // then the timeslot is available
+      if (times.length < walkers.length) {
         availableAppts.push(increments[j]._i);
       }
     }
     console.log(availableAppts);
+    const apptsDiv = document.getElementById('appointments');
+    $(apptsDiv).empty();
+    for (let i = 0; i < availableAppts.length; i++) {
+      const apptBtn = document.createElement('btn');
+      $(apptBtn).addClass('btn btn-light btn-lg btn-block apptBtn');
+      apptBtn.append(availableAppts[i]);
+      apptsDiv.append(apptBtn);
+    }
+
+    if (apptsDiv.style.display === 'none') {
+      apptsDiv.style.display = 'block';
+    }
   });
+
+
 }
-// pull all appointments from appointments table that match the date
-// store in a local variable
-// run for loop with conditional to populate the modal with timeslot buttons
-// conditional checks to see if the appointment exists in the appointments table
-// if exists, don't create the button - continue javascript statement
