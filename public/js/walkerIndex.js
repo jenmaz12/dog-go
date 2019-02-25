@@ -1,11 +1,10 @@
 $(document).ready(() => {
   // Getting references to the name input and author container, as well as the table body
-  const nameInput = $('#customerName');
-  const newPetName = $('#petName');
+  const nameInput = $('#walkerName');
   const newEmail = $('#email');
   const newPhoneNumber = $('#number');
   // const customerList = $('tbody');
-  const CustomerContainer = $('#customer-container');
+  const CustomerContainer = $('#walker-container');
   const url = ('/calendar');
 
   // Adding event listeners to the form to create a new object, and the button to delete a customer
