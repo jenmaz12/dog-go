@@ -152,7 +152,8 @@ function showAppointments(day) {
       // if the times array length for that increment is less than the number of walkers (walkers length),
       // then the timeslot is available
       if (times.length < walkers.length) {
-        availableAppts.push(increments[j]._i);
+        // eslint-disable-next-line no-undef
+        availableAppts.push(moment(increments[j].format('dddd, MMMM Do YYYY, h:mm:ss a')));
       }
     }
     console.log(availableAppts);
@@ -161,14 +162,37 @@ function showAppointments(day) {
     for (let i = 0; i < availableAppts.length; i++) {
       const apptBtn = document.createElement('btn');
       $(apptBtn).addClass('btn btn-light btn-lg btn-block apptBtn');
-      apptBtn.append(availableAppts[i]);
+      $(apptBtn).attr('data-dateTime', availableAppts[i]._i);
+      apptBtn.append(availableAppts[i]._i);
       apptsDiv.append(apptBtn);
     }
 
     if (apptsDiv.style.display === 'none') {
       apptsDiv.style.display = 'block';
     }
+    bookAppt();
   });
+}
 
-
+function bookAppt() {
+  $('.apptBtn').click(function () {
+    // eslint-disable-next-line no-undef
+    const dateTime = $(this).attr('data-datetime');
+    console.log(dateTime);
+    // eslint-disable-next-line no-undef
+    // increments.push(moment(moStart.add(30, 'm').format('YYYY-MM-DD HH:mm:ss')));
+    // eslint-disable-next-line no-undef
+    const modateTime = moment(dateTime, 'dddd, MMMM Do YYYY, h:mm:ss a');
+    const newMo = modateTime.format('YYYY-MM-DD HH:mm:ss');
+    const apptParts = newMo.split(' ');
+    console.log(apptParts);
+    $.post('/api/appointments', {
+      date: apptParts[0],
+      startTime: apptParts[1],
+      walkerChosen: 1,
+    })
+      // this will change
+      // eslint-disable-next-line no-alert
+      .then(alert('Success!'));
+  });
 }
