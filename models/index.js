@@ -14,9 +14,9 @@ const mysql = require('mysql');
 // eslint-disable-next-line no-unused-vars
 let connection;
 
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable]);
-} 
+// if (config.use_env_variable) {
+//   sequelize = new Sequelize(process.env[config.use_env_variable]);
+// } 
 if (process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
