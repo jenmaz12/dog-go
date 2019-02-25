@@ -34,4 +34,3 @@ available BOOL DEFAULT true
 
 SELECT * FROM walkers;
 SELECT * FROM customers;
-SELECT * FROM service;
