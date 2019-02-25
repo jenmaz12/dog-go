@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(__dirname, '..', 'config', 'config.js'))[env];
+const config = require(path.join(`${__dirname}/../config/config.js`))[env];
 const db = {};
 let sequelize;
 
@@ -16,7 +16,7 @@ let connection;
 
 // if (config.use_env_variable) {
 //   sequelize = new Sequelize(process.env[config.use_env_variable]);
-// } 
+// }
 if (process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
