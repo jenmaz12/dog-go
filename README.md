@@ -22,7 +22,6 @@ mySql
 Sequelize
 Popmotion
 Moment
-```
 
 You will also need to use mySql Workbench
 
