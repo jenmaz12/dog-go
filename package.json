@@ -18,7 +18,8 @@
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
     "popmotion": "^8.6.3",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.41.2",
+    "sequelize-heroku": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
