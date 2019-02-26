@@ -1,37 +1,36 @@
 $(document).ready(() => {
   // Getting references to the name input and author container, as well as the table body
-  const nameInput = $('#walkerName');
-  const newEmail = $('#email');
-  const newPhoneNumber = $('#number');
-  // const customerList = $('tbody');
-  const CustomerContainer = $('#walker-container');
+  const walkerNameInput = $('#walkerName');
+  const newWalkerEmail = $('#walkerEmail');
+  const newWalkerPhoneNumber = $('#walkerNumber');
+  const walkerContainer = $('#walker-container');
   const url = ('/calendar');
 
   // Adding event listeners to the form to create a new object, and the button to delete a customer
-  $(document).on('click', '#customer-form', handleCustomerFormSubmit);
+  $(document).on('click', '#walker-form', handleWalkerFormSubmit);
 
 
   // A function to handle what happens when the form is submitted to create a new Author
-  function handleCustomerFormSubmit(event) {
+  function handleWalkerFormSubmit(event) {
     event.preventDefault();
-    if (!nameInput.val()) {
+    console.log('clicked!');
+    if (!walkerNameInput.val()) {
       renderEmpty();
     }
     // show appointments
-    showAppointments();
+    showSchedule();
     // Calling the upsertAuthor function and passing in the value of the name input
-    upsertCustomer(
+    upsertWalker(
       {
-        name: nameInput.val(),
-        petName: newPetName.val(),
-        email: newEmail.val(),
-        phoneNumber: newPhoneNumber.val(),
+        name: walkerNameInput.val(),
+        email: newWalkerEmail.val(),
+        phoneNumber: newWalkerPhoneNumber.val(),
       },
     );
 
     // A function for creating an author. Calls getAuthors upon completion
-    function upsertCustomer(newCustomer) {
-      $.post('/api/customers', newCustomer)
+    function upsertWalker(newWalker) {
+      $.post('/api/walkers', newWalker)
       // this will change
         .then(window.location = url);
     }
@@ -40,16 +39,15 @@ $(document).ready(() => {
     function renderEmpty() {
       const alertDiv = $('<div>');
       alertDiv.addClass('alert alert-danger');
-      alertDiv.text('You must create an Customer before you can create an Appointment.');
-      CustomerContainer.append(alertDiv);
+      alertDiv.text('You must create a Walker before you can create a Schedule.');
+      walkerContainer.append(alertDiv);
     }
 
-    function showAppointments() {
+    function showSchedule() {
       const newDiv = $('<div>');
-      newDiv.text('Customer:');
-      newDiv.text(nameInput.val());
+      newDiv.text('You are now Available for these times!');
       // this will change
-      CustomerContainer.append(newDiv);
+      walkerContainer.append(newDiv);
     }
   }
 });
