@@ -41,6 +41,8 @@ $(document).ready(() => {
         // }
       });
     });
+    const frm = document.getElementsByName('walkerId-form')[0];
+    frm.reset();
   });
 });
 
