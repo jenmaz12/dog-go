@@ -1,6 +1,6 @@
 # Dog-Go
 
-We're your dog's other best friend. We've created an app that allows customers to make appointments from local dog walkers. Check it out deployed on Heroku. https://blooming-spire-98049.herokuapp.com/ 
+We're your dog's other best friend. We've created an app that allows customers to make appointments with local dog walkers. Check it out deployed on Heroku. https://blooming-spire-98049.herokuapp.com/ 
 
 ## Layout
 
