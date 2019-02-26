@@ -120,79 +120,95 @@ function createIncrements(startTime) {
     increments.push(moment(moStart.add(30, 'm').format('YYYY-MM-DD HH:mm:ss')));
   }
 }
-
+let bookedAppts = [];
 function showAppointments(day) {
-  console.log(increments);
   // create arrays for booked, available, and walkers
-  const bookedAppts = [];
+  bookedAppts = [];
   const availableAppts = [];
   const walkers = [];
   // get walkers from db and push into walkers array
   $.get('api/walkers', (data) => {
     walkers.push(data);
-  });
-  console.log(walkers);
-  // get appts from db and push into bookedAppts array in correct format
-  $.get(`/api/appointments/${day}`, (data) => {
-    for (let i = 0; i < data.length; i++) {
-      bookedAppts.push(`${data[i].date} ${data[i].startTime}`);
-    }
-    // loop through timeslots
-    for (let j = 0; j < increments.length; j++) {
-      const times = [];
-      // loop through bookedAppts for each increment
-      for (let i = 0; i < bookedAppts.length; i++) {
-        // if the bookedAppt is equal to the increment, then push test to the times array
-        if (bookedAppts[i] === increments[j]._i) {
-          times.push('test');
+    console.log(walkers);
+    $.get(`/api/appointments/${day}`, (data2) => {
+      for (let i = 0; i < data2.length; i++) {
+        bookedAppts.push(`${data2[i].date} ${data2[i].startTime}`);
+      }
+      // loop through timeslots
+      for (let j = 0; j < increments.length; j++) {
+        const times = [];
+        // loop through bookedAppts for each increment
+        for (let i = 0; i < bookedAppts.length; i++) {
+          // if the bookedAppt is equal to the increment, then push test to the times array
+          if (bookedAppts[i] === increments[j]._i) {
+            times.push('test');
+          }
+        }
+        console.log(times);
+        // if the times array length for that increment is less than the number of walkers (walkers length),
+        // then the timeslot is available
+        if (times.length < walkers.length) {
+          // eslint-disable-next-line no-undef
+          availableAppts.push(moment(increments[j].format('dddd, MMMM Do YYYY, h:mm:ss a')));
         }
       }
-      // console.log(times);
-      // console.log(walkers);
-      // if the times array length for that increment is less than the number of walkers (walkers length),
-      // then the timeslot is available
-      if (times.length < walkers.length) {
-        // eslint-disable-next-line no-undef
-        availableAppts.push(moment(increments[j].format('dddd, MMMM Do YYYY, h:mm:ss a')));
+      console.log(availableAppts);
+      const apptsDiv = document.getElementById('appointments');
+      $(apptsDiv).empty();
+      for (let i = 0; i < availableAppts.length; i++) {
+        const apptBtn = document.createElement('btn');
+        $(apptBtn).addClass('btn btn-light btn-lg btn-block apptBtn');
+        $(apptBtn).attr('data-dateTime', availableAppts[i]._i);
+        apptBtn.append(availableAppts[i]._i);
+        apptsDiv.append(apptBtn);
       }
-    }
-    console.log(availableAppts);
-    const apptsDiv = document.getElementById('appointments');
-    $(apptsDiv).empty();
-    for (let i = 0; i < availableAppts.length; i++) {
-      const apptBtn = document.createElement('btn');
-      $(apptBtn).addClass('btn btn-light btn-lg btn-block apptBtn');
-      $(apptBtn).attr('data-dateTime', availableAppts[i]._i);
-      apptBtn.append(availableAppts[i]._i);
-      apptsDiv.append(apptBtn);
-    }
-
-    if (apptsDiv.style.display === 'none') {
-      apptsDiv.style.display = 'block';
-    }
-    bookAppt();
+      if (apptsDiv.style.display === 'none') {
+        apptsDiv.style.display = 'block';
+      }
+      bookAppt();
+    });
   });
+  // get appts from db and push into bookedAppts array in correct format
 }
 
 function bookAppt() {
   $('.apptBtn').click(function () {
     // eslint-disable-next-line no-undef
     const dateTime = $(this).attr('data-datetime');
-    console.log(dateTime);
-    // eslint-disable-next-line no-undef
-    // increments.push(moment(moStart.add(30, 'm').format('YYYY-MM-DD HH:mm:ss')));
     // eslint-disable-next-line no-undef
     const modateTime = moment(dateTime, 'dddd, MMMM Do YYYY, h:mm:ss a');
     const newMo = modateTime.format('YYYY-MM-DD HH:mm:ss');
     const apptParts = newMo.split(' ');
-    console.log(apptParts);
-    $.post('/api/appointments', {
-      date: apptParts[0],
-      startTime: apptParts[1],
-      walkerChosen: 1,
-    })
-      // this will change
-      // eslint-disable-next-line no-alert
-      .then(alert('Success!'));
+    // started code to look for which walker is availble at that time -----------------------------------
+    bookedAppts = [];
+    const walkers = [];
+    let walkerAssigned;
+    $.get(`/api/appointments/${apptParts[0]}`, (data) => {
+      // get all booked appointments at that time
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].startTime === apptParts[1]) {
+          bookedAppts.push(data[i]);
+        }
+      }
+      console.log(bookedAppts);
+      $.get('api/walkers', (data2) => {
+        walkers.push(data2);
+      });
+      for (let j = 0; j < walkers.length; j++) {
+        for (let h = 0; h < bookedAppts.length; h++) {
+          if (walkers[j].id === bookedAppts[h].walkerChosen) {
+            break;
+          }
+        }
+      }
+      // ----------------------------------------------------------------------
+      $.post('/api/appointments', {
+        date: apptParts[0],
+        startTime: apptParts[1],
+        walkerChosen: 1,
+      })
+        // eslint-disable-next-line no-alert
+        .then(alert('Success!'));
+    });
   });
 }
