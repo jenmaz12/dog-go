@@ -18,7 +18,8 @@
             "radix": "off",
             "import/no-dynamic-require": "off",
             "max-len":"off",
-            "no-underscore-dangle":"off"
+            "no-underscore-dangle":"off",
+            "guard-for-in":"off"
         }
     
     }

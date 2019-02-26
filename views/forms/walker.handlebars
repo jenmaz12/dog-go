@@ -1,27 +1,37 @@
-<div id="walkerForm" class="input-form">
-     <div id="walkerForm">
-    <div class="container2">
-        <div class="inner">
-            <h1>Fill it out</h1>
-            {{!-- <p>Please fill out the form below because that's what we really need you to do. Thanks.</p> --}}
-            <form>
-                <span class="msg">Full name please!</span>
-                <input type="text" placeholder="Name" class="txtfld" id="walkerName" name="Name">
-                <input type="test" placeholder="Email" class="txtfld" id="walkerEmail" email="email">
-                <input type="text" placeholder="Phone Number" class="txtfld" id="walkerNumber">
-                {{!-- <button type="submit" value="continue" id="customer-form">Continue</button>
+<div class="input-form walkerForm">
+    <div class="walkerForm">
+        <div class="container2">
+            <div class="inner">
+                <h1>Enter your information to become a walker!</h1>
+                {{!-- <p>Please fill out the form below because that's what we really need you to do. Thanks.</p> --}}
+                <form>
+                    <span class="msg">Full name please!</span>
+                    <input type="text" placeholder="Name" class="txtfld" id="walkerName" name="Name">
+                    <input type="test" placeholder="Email" class="txtfld" id="walkerEmail" email="email">
+                    <input type="text" placeholder="Phone Number" class="txtfld" id="walkerNumber">
+                    {{!-- <button type="submit" value="continue" id="customer-form">Continue</button>
                 <button type="delete" value="delete" id="delete-customer">Delete Account</button> --}}
 
-                <input type="submit" value="Continue" class="btn" id="walker-form">
-                <input type="submit" value="Delete Account" class="btn" id="walker-form">
-            </form>
-            <hr>
-            <div id="walker-container">
+                    <button type="submit" class="btn" id="walker-form">Continue</button>
+                </form>
+                <hr>
             </div>
-        </div>
-    </div>
 
-    <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
+        </div>
+        <div id="walker-container">
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody id="walkerTable"></tbody>
+            </table>
+        </div>
+        <script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
         <script>
             const container2 = popmotion.styler(document.querySelector('.container2'));
             const formElements = document.querySelector('.inner');
@@ -72,10 +82,10 @@
                 .start((v) => v.forEach((x, i) => stylers[i].set('y', x)));
 
         </script>
-</div>
+    </div>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/customerIndex.js"></script>
+<script src="/js/walkerIndex.js"></script>
 {{!-- <button type="submit" value="continue" id="customer-form">Continue</button>
 <button type="delete" value="delete" id="delete-customer">Delete Account</button> --}}
