@@ -1,12 +1,6 @@
 // import { keyframes } from 'popmotion';
 
 $(document).ready(() => {
-  // Getting references to the name input and author container, as well as the table body
-  // const walkerNameInput = $('#walkerName').val().trim();
-  // const newWalkerEmail = $('#walkerEmail').val().trim();
-  // const newWalkerPhoneNumber = $('#walkerNumber').val().trim();
-  const walkerContainer = $('#walker-container');
-  const url = ('/');
   let newWalker;
 
   // Adding event listeners to the form to create a new object, and the button to delete a customer
